@@ -1,6 +1,5 @@
-## Hi there 👋
+<!--## Hi there 👋
 
-<!--
 **glenniii-dev/glenniii-dev** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
@@ -15,7 +14,7 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-# 👋 Hey, I'm Glenn (aka glenniii.dev) 
+# 👋 Hey, I'm Glenn 
 🎓 I'm a 16-year-old front-end developer building clean, fast, and user-first websites. 
 💻 I love turning ideas into code and learning modern web technologies. 
 
