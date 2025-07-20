@@ -61,4 +61,3 @@ Here are some ideas to get you started:
 ## 📫 Contact Me 
 - 📬 Email: [glenniii.dev@gmail.com](mailto:glenniii.dev@gmail.com)
 - 🐙 GitHub: [@glenniii](https://github.com/glenniii)
-- 💼 LinkedIn: [Your Name](https://linkedin.com/in/ghensleyiii)
