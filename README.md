@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 -->
 
 # 👋 Hey, I'm Glenn 
-🎓 I'm a 16-year-old front-end developer building clean, fast, and user-first websites. 
+🎓 I'm a front-end developer designing clean, engaging websites that put users first.
 💻 I love turning ideas into code and learning modern web technologies. 
 
 ## 🚀 What I Do 
