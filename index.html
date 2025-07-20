@@ -3,8 +3,193 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glenn III</title>
+  <title>Glenn Hensley III</title>
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="assets/icons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="shortcut icon" href="assets/icons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Glenn" />
+  <link rel="manifest" href="assets/icons/site.webmanifest" />
+  <!-- Open Sans Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fallback: Uncomment below if hosting Tailwind locally -->
+  <!-- <link href="/path/to/local/tailwind.min.css" rel="stylesheet"> -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    .animated-gradient {
+      background: linear-gradient(45deg, #ff0000, #ff9900, #33cc33, #00ccff, #6633cc, #ff33cc, #ff0000);
+      background-size: 400% 400%;
+      animation: gradientAnimation 30s ease-in-out infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .about-grid img {
+      justify-self: center;
+    }
+
+    img {
+      pointer-events: none;
+    }
+
+    /* Ensure contact section inputs are full-width on smaller screens */
+    @media (max-width: 1024px) {
+      .contact-inputs input,
+      .contact-inputs textarea,
+      .contact-inputs button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="font-open-sans bg-gray-100 text-gray-800 min-h-screen">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-7xl">
+    <header class="text-center animated-gradient rounded-3xl p-8 sm:p-12 shadow-lg mb-12">
+      <h1 class="text-4xl sm:text-5xl font-bold text-white">Glenn Hensley III</h1>
+      <p class="mt-2 text-lg text-white/90">Front-End Developer</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <section class="bg-white rounded-3xl p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
+        <h2 class="text-2xl font-semibold text-green-600 border-b-2 border-green-600 pb-2 mb-4">About Me</h2>
+        <div class="about-grid">
+          <p class="text-gray-700 leading-relaxed">Hey, I'm Glenn, a front-end developer who’s passionate about crafting clean, engaging websites. I love creating and transforming ideas through code.</p>
+          <img src="assets/images/glenniii.png" alt="Profile Picture" class="w-24 h-24 lg:w-32 lg:h-32 rounded-full border-4 border-white shadow-md transition-transform duration-300 hover:scale-105">
+        </div>
+      </section>
+
+      <section class="bg-white rounded-3xl p-8 shadow-md transition-transform duration-300 hover:-translate-y-1 lg:col-span-2">
+        <h2 class="text-2xl font-semibold text-green-600 border-b-2 border-green-600 pb-2 mb-4">Skills</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-brands fa-html5 mr-2"></i>HTML</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-brands fa-css3-alt mr-2"></i>CSS</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-brands fa-js mr-2"></i>JavaScript</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-brands fa-react mr-2"></i>React</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-solid fa-wind mr-2"></i>Tailwind CSS</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-solid fa-code mr-2"></i>TypeScript</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-brands fa-git-alt mr-2"></i>Git</span>
+          <span class="bg-green-50 text-green-700 px-4 py-2 rounded-full flex items-center"><i class="fa-solid fa-mobile-alt mr-2"></i>Responsive Design</span>
+        </div>
+      </section>
+
+      <section class="lg:col-span-3 bg-white rounded-3xl p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
+        <h2 class="text-2xl font-semibold text-green-600 border-b-2 border-green-600 pb-2 mb-6">Projects</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/codexedoc.png" alt="CODEXEDOC" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">CODEXEDOC</h3>
+            <p class="text-gray-600 mb-4">A coding education site using HTML, CSS, and JavaScript.</p>
+            <a href="https://www.codexedoc.com/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/dish-dash.png" alt="Dish Dash" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Dish Dash</h3>
+            <p class="text-gray-600 mb-4">A responsive recipe finder site using HTML, CSS, and JavaScript.</p>
+            <a href="portfolio/dish-dash/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/original-trombones.png" alt="Original Trombones" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Original Trombones</h3>
+            <p class="text-gray-600 mb-4">A product landing page using HTML, and CSS.</p>
+            <a href="portfolio/original-trombones/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/pangolin-magazine.png" alt="Pangolin Magazine" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Pangolin Magazine</h3>
+            <p class="text-gray-600 mb-4">A magazine site using HTML, and CSS.</p>
+            <a href="portfolio/pangolin-magazine/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/dessert-shop.png" alt="Dessert Shop" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Dessert Shop</h3>
+            <p class="text-gray-600 mb-4">A online shopping page using HTML, CSS, and JavaScript.</p>
+            <a href="portfolio/dessert-shop/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/rock-paper-scissors.png" alt="Rock Paper Scissors" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Rock Paper Scissors</h3>
+            <p class="text-gray-600 mb-4">A rock paper scissors game using HTML, CSS, and JavaScript.</p>
+            <a href="portfolio/rock-paper-scissors/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/calorie-counter.png" alt="Calorie Counter" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Calorie Counter</h3>
+            <p class="text-gray-600 mb-4">A calorie counter app using HTML, CSS, and JavaScript.</p>
+            <a href="portfolio/calorie-counter/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/palindrome.png" alt="Palindrome Checker" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Palindrome Checker</h3>
+            <p class="text-gray-600 mb-4">A palindrome checker app using HTML, CSS, and JavaScript.</p>
+            <a href="portfolio/palindrome-checker/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-6 transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
+            <img src="assets/images/roman-numeral.png" alt="Peak Planner" class="w-full h-40 object-cover rounded-lg mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Roman Numeral Converter</h3>
+            <p class="text-gray-600 mb-4">A roman numeral checker app using HTML, CSS, and JavaScript</p>
+            <a href="portfolio/roman-numeral-converter/" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors duration-300 inline-block">View Project</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="lg:col-span-3 bg-white rounded-3xl p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
+        <h2 class="text-2xl font-semibold text-green-600 border-b-2 border-green-600 pb-2 mb-6">Contact</h2>
+        <div class="flex flex-col lg:flex-row gap-6">
+          <div class="flex-1 contact-inputs flex flex-col gap-4 lg:max-w-sm">
+            <input type="text" id="name" placeholder="Your Name" class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-600">
+            <input type="email" id="email" placeholder="Your Email" class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-600">
+          </div>
+          <div class="flex-1 flex flex-col gap-4">
+            <textarea id="message" placeholder="Your Message" rows="8" class="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-600"></textarea>
+            <button onclick="sendEmail()" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-colors duration-300 w-full lg:w-auto">Send Message</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    emailjs.init("BzNEgUHRdnk1C1Vxz"); // Replace with your EmailJS public ID
+    function sendEmail() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (!name || !email || !message) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      emailjs.send("service_0v69coe", "template_fily0vf", {
+        name: name,
+        email: email,
+        message: message
+      })
+      .then(() => {
+        alert('Message sent successfully!');
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      }, (error) => {
+        alert('Failed to send message. Please try again.');
+        console.error('EmailJS error:', error);
+      });
+    }
+  </script>
 </body>
 </html>

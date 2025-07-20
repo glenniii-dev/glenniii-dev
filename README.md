@@ -15,9 +15,9 @@ Here are some ideas to get you started:
 -->
 
 # 👋 Hey, I'm Glenn 
-🎓 I'm a front-end developer designing clean, engaging websites that put users first.
+🎓 I'm a front-end developer designing clean, engaging websites.
 
-💻 I love turning ideas into code and learning modern web technologies. 
+💻 I love creating and transforming ideas through code. 
 
 ## 🚀 What I Do 
 - 🧠 Write HTML, CSS, JavaScript, and TypeScript 
@@ -32,7 +32,3 @@ Here are some ideas to get you started:
 ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white) 
 ![React](https://img.shields.io/badge/-React-20232A?logo=react&logoColor=61DAFB)
 ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white)
-
-## 📫 Contact Me 
-- 📬 Email: [glenniii.dev@gmail.com](mailto:glenniii.dev@gmail.com)
-- 🐙 GitHub: [@glenniii-dev](https://github.com/glenniii-dev)
