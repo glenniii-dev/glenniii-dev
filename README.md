@@ -35,4 +35,4 @@ Here are some ideas to get you started:
 
 ## 🌐 My Site
 
-[glenniii.dev] (https://glenniii.dev)
+[glenniii.dev](https://glenniii.dev)
