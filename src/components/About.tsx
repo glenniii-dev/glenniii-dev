@@ -4,7 +4,7 @@ export default function About() {
         <h2 className="text-2xl font-semibold text-[#ff8000] border-b-2 border-[#ff8000] pb-2 mb-4">About Me</h2>
         <div className="about-grid">
           <p className="text-white leading-relaxed">Hey, I'm Glenn, a front-end developer who’s passionate about crafting clean, engaging websites. I love creating and transforming ideas through code.</p>
-          <img src="../../public/images/glenniii.png" alt="Profile Picture" className="w-24 h-24 lg:w-32 lg:h-32 rounded-2xl border-4 border-[#ff8000] shadow-md transition-transform duration-300 hover:scale-105" />
+          <img src="/images/glenniii.png" alt="Profile Picture" className="w-24 h-24 lg:w-32 lg:h-32 rounded-2xl border-4 border-[#ff8000] shadow-md transition-transform duration-300 hover:scale-105" />
         </div>
     </section>
   )
