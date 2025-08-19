@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "powershell -Command \"npm run build; if (Test-Path docs) { Get-ChildItem docs -Exclude CNAME | Remove-Item -Recurse -Force } else { New-Item -ItemType Directory -Path docs | Out-Null }; Copy-Item -Recurse -Force dist\\* docs\\; git add docs; git commit -m \\\"Auto deploy to docs\\\"; git push\"",
+    "deploy": "powershell -Command \"npm run build; if (Test-Path docs) { Get-ChildItem docs -Exclude CNAME | Remove-Item -Recurse -Force } else { New-Item -ItemType Directory -Path docs | Out-Null }; Copy-Item -Recurse -Force dist\\* docs\\; git add docs; git commit -m \\\"Auto deploy to docs\\\"; git push\""
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
