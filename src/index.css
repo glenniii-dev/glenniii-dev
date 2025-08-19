@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+.animated-gradient {
+      background: linear-gradient(45deg, #ff0000, #ff8000, #00cc00, #0080ff, #8000ff, #ff00ff, #ff0000);
+      background-size: 400% 400%;
+      animation: gradientAnimation 30s ease-in-out infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .about-grid img {
+      justify-self: center;
+    }
+
+    img {
+      pointer-events: none;
+    }
+
+    /* Ensure contact section inputs are full-width on smaller screens */
+    @media (max-width: 1024px) {
+      .contact-inputs input,
+      .contact-inputs textarea,
+      .contact-inputs button {
+        width: 100%;
+      }
+    }
