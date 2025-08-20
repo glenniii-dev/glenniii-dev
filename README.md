@@ -6,7 +6,7 @@
 
 ## 🚀 What I Do
 
-- 🧠 Write HTML, CSS, JavaScript, TypeScript
+- 🧠 Write HTML, CSS, JavaScript, and TypeScript
 - ⚛️ Build responsive UIs with React + Tailwind CSS
 - 🛠 Create portfolio projects that solve real problems
 - 📚 Currently learning full-stack development
