@@ -3,7 +3,7 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react"
 import Shapes from "../three/Shapes";
-import PlanetSection from "../three/Planet";
+// import PlanetSection from "../three/Planet";
 
 export default function Hero() {
 
