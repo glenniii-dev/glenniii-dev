@@ -11,7 +11,7 @@ export default function Bio() {
     
             <div className="col-start-1 max-w-screen break-word md:max-w-3xl text-slate-300 text-lg leading-relaxed space-y-6">
               <p>
-                Hello, I’m Glenn! I’ve always been passionate about creating things and exploring technology, and the idea of being able to combine the two as a career led me to become a web developer.
+                Hello, I&apos;m Glenn! I&apos;ve always been passionate about creating things and exploring technology, and the idea of being able to combine the two as a career led me to become a web developer.
               </p>
     
               <p>
@@ -31,7 +31,7 @@ export default function Bio() {
                 Towards the end of my internship, I was promoted to Lead Web Developer, overseeing all web development projects. I&apos;m still actively applying for paid web development roles and freelancing, continually learning and growing. I&apos;m happy to have chosen this path — it&apos;s been very rewarding, and I am passionate about transforming ideas into reality through code.
               </p>
             </div>
-            <Button link="/" label="Resume" />
+            <Button link="/Glenn-Hensley-III.pdf" label="Resume" />
             <Avatar src="/glenn.png" alt="Glenn Hensley III" className="row-start-1 max-w-xs md:max-w-sm lg:col-start-2 lg:row-end-3" />
           </section>
     </main>
