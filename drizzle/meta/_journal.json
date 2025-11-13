@@ -8,6 +8,13 @@
       "when": 1761331789119,
       "tag": "0000_curly_sasquatch",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1761425968221,
+      "tag": "0001_clammy_loners",
+      "breakpoints": true
     }
   ]
 }

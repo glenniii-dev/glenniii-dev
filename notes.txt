@@ -1,0 +1,407 @@
+=================================================================
+GLENNIII.DEV - COMPREHENSIVE PROJECT DOCUMENTATION
+=================================================================
+
+Table of Contents
+----------------
+1. Architecture Overview
+2. Technology Stack
+3. Database Schema & Relations
+4. Authentication & Authorization
+5. API Endpoints
+6. Frontend Structure
+7. Security Implementation
+8. Development & Deployment
+9. Maintenance & Monitoring
+
+1. ARCHITECTURE OVERVIEW
+-----------------------
+
+a) System Architecture Diagram:
+```
+                                     ┌──────────────┐
+                                     │   Browser    │
+                                     └──────┬───────┘
+                                           │
+                                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      Next.js App                            │
+├───────────────┬─────────────────┬───────────────┬──────────┤
+│  App Router   │     API Routes  │   Components  │  Utils   │
+└───────┬───────┴────────┬────────┴───────┬───────┴────┬─────┘
+        │                │                │            │
+        ▼                ▼                ▼            ▼
+┌──────────┐    ┌───────────────┐  ┌──────────┐  ┌────────┐
+│  Pages   │    │  Auth Proxy   │  │  Three.js│  │ Auth   │
+└──────────┘    └───────┬───────┘  └──────────┘  └────────┘
+                        │
+                        ▼
+                ┌───────────────┐
+                │  Drizzle ORM  │
+                └───────┬───────┘
+                        │
+                        ▼
+                ┌───────────────┐
+                │PostgreSQL(Neon)│
+                └───────────────┘
+```
+
+b) Data Flow Diagram:
+```
+┌──────────┐     ┌───────────┐     ┌──────────┐     ┌──────────┐
+│  Client  │ ──► │Next.js App│ ──► │API Routes│ ──► │Database  │
+└──────────┘     └───────────┘     └──────────┘     └──────────┘
+     ▲                 │                 │                │
+     └─────────────────┴─────────────────┴────────────────┘
+           Response Flow with Data/Errors
+```
+
+2. TECHNOLOGY STACK
+------------------
+
+a) Frontend:
+- Next.js 16 (React Framework)
+- TypeScript
+- TailwindCSS (Styling)
+- Three.js (3D Graphics)
+- GSAP (Animations)
+
+b) Backend:
+- Next.js API Routes
+- Drizzle ORM
+- JWT Authentication
+- bcrypt (Password Hashing)
+
+c) Database:
+- Neon (PostgreSQL)
+- Connection Pooling
+- SSL Encryption
+
+d) Development Tools:
+- VS Code
+- Git/GitHub
+- npm/Node.js
+- Drizzle Studio
+
+3. DATABASE SCHEMA & RELATIONS
+----------------------------
+
+a) Entity Relationship Diagram:
+```
+┌─────────┐     ┌─────────┐     ┌──────────┐
+│ Admin   │     │ Blogs   │     │Projects  │
+├─────────┤     ├─────────┤     ├──────────┤
+│*id      │     │*id      │     │*id       │
+│username │     │title    │     │title     │
+│password │     │content  │     │description│
+│email    │     │tags     │     │link      │
+│isAdmin  │     │published│     └──────────┘
+└─────────┘     │createdAt│
+                │updatedAt│          ▲
+                └─────────┘          │
+                     │               │
+                     ▼               │
+                ┌─────────┐         │
+                │Comments │         │
+                ├─────────┤         │
+                │*id      │         │
+                │name     │         │
+                │email    │         │
+                │comment  │         │
+                │blogId   │         │
+                │approved │         │
+                └─────────┘         │
+```
+
+b) Table Details:
+
+Admin Table:
+```sql
+CREATE TABLE admin (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR NOT NULL,
+  password VARCHAR NOT NULL, -- Bcrypt hashed
+  email VARCHAR UNIQUE NOT NULL,
+  isAdmin BOOLEAN NOT NULL DEFAULT false
+);
+```
+
+Projects Table:
+```sql
+CREATE TABLE projects (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR NOT NULL,
+  description TEXT NOT NULL,
+  link VARCHAR NOT NULL
+);
+```
+
+Blogs Table:
+```sql
+CREATE TABLE blogs (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR NOT NULL,
+  tags VARCHAR NOT NULL,
+  content TEXT NOT NULL,
+  isPublished BOOLEAN NOT NULL DEFAULT false,
+  createdAt TIMESTAMP NOT NULL DEFAULT NOW(),
+  updatedAt TIMESTAMP NOT NULL DEFAULT NOW()
+);
+```
+
+Comments Table:
+```sql
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  email VARCHAR NOT NULL,
+  comment TEXT NOT NULL,
+  blogId INTEGER NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+  createdAt TIMESTAMP NOT NULL DEFAULT NOW(),
+  isApproved BOOLEAN NOT NULL DEFAULT false
+);
+```
+
+4. AUTHENTICATION & AUTHORIZATION
+------------------------------
+
+a) Authentication Flow:
+```
+┌──────────┐    ┌────────────┐    ┌──────────┐    ┌──────────┐
+│  Login   │───►│Verify Creds│───►│Create JWT│───►│Set Cookie│
+└──────────┘    └────────────┘    └──────────┘    └──────────┘
+                       │
+                       ▼
+                ┌────────────┐
+                │Check Admin │
+                └────────────┘
+```
+
+b) Protected Route Flow:
+```
+┌──────────┐    ┌────────────┐    ┌──────────┐    ┌──────────┐
+│ Request  │───►│Check Token │───►│Verify JWT│───►│Check Role│
+└──────────┘    └────────────┘    └──────────┘    └──────────┘
+      │               │                │                │
+      │               ▼                ▼                ▼
+      │          401 if no       401 if invalid   403 if not
+      │            token            token          admin
+      │
+      ▼
+┌──────────┐
+│ Handler  │
+└──────────┘
+```
+
+5. API ENDPOINTS
+--------------
+
+a) Public Routes:
+```
+Authentication:
+POST /api/auth/login
+└── Request: { email, password }
+└── Response: { user, token }
+
+Content:
+GET /api/blogs
+├── Query: { page, limit, tag }
+└── Response: { blogs[], total, pages }
+
+GET /api/projects
+├── Query: { page, limit }
+└── Response: { projects[], total, pages }
+```
+
+b) Protected Routes (Admin Only):
+```
+Dashboard:
+GET /api/admin/dashboard
+└── Response: {
+      stats: {
+        totalBlogs,
+        totalProjects,
+        pendingComments
+      },
+      recentActivity: {...}
+    }
+
+Blog Management:
+POST /api/admin/blogs
+├── Body: { title, content, tags, isPublished }
+└── Response: { blog }
+
+PUT /api/admin/blogs/:id
+├── Body: { title?, content?, tags?, isPublished? }
+└── Response: { blog }
+
+DELETE /api/admin/blogs/:id
+└── Response: { success: true }
+
+Project Management:
+POST /api/admin/projects
+├── Body: { title, description, link }
+└── Response: { project }
+
+PUT /api/admin/projects/:id
+├── Body: { title?, description?, link? }
+└── Response: { project }
+
+DELETE /api/admin/projects/:id
+└── Response: { success: true }
+```
+
+6. FRONTEND STRUCTURE
+-------------------
+
+a) Component Hierarchy:
+```
+app/
+├── layout.tsx (Root Layout)
+├── page.tsx (Homepage)
+├── about/
+│   └── page.tsx
+├── blog/
+│   ├── page.tsx
+│   └── [id]/
+│       └── page.tsx
+├── projects/
+│   └── page.tsx
+└── dashboard/ (Admin Only)
+    └── page.tsx
+
+components/
+├── about/
+│   ├── Avatar.tsx
+│   ├── Bio.tsx
+│   ├── Education.tsx
+│   ├── Experience.tsx
+│   └── Stack.tsx
+├── auth/
+│   └── Login.tsx
+├── home/
+│   └── Hero.tsx
+├── shared/
+│   ├── Button.tsx
+│   ├── ContentList.tsx
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   └── NavBar.tsx
+└── three/
+    ├── Planet.tsx
+    └── Shapes.jsx
+```
+
+b) Page Routes Flow:
+```
+          ┌───────────┐
+          │   Home    │
+          └─────┬─────┘
+     ┌──────────┴──────────┐
+┌────┴────┐          ┌─────┴────┐
+│  About  │          │  Blog    │
+└─────────┘          └──────────┘
+     │                    │
+┌────┴────┐         ┌────┴────┐
+│Projects │         │ Post    │
+└─────────┘         └─────────┘
+     │
+┌────┴────┐
+│Dashboard│ (Admin Only)
+└─────────┘
+```
+
+7. SECURITY IMPLEMENTATION
+------------------------
+
+a) Password Security:
+- Bcrypt hashing (10 rounds)
+- Salt per password
+- Minimum length enforcement
+
+b) JWT Implementation:
+```
+Token Structure:
+┌────────────┐  ┌─────────────────┐  ┌────────────┐
+│  Header    │  │     Payload     │  │ Signature  │
+├────────────┤  ├─────────────────┤  ├────────────┤
+│ alg: HS256 │  │ uid: user.id    │  │   HMAC     │
+│ typ: JWT   │  │ email: user@... │  │  SHA256    │
+└────────────┘  │ isAdmin: bool   │  └────────────┘
+                └─────────────────┘
+```
+
+c) Cookie Security:
+- HTTP-Only
+- Secure in production
+- Same-site strict
+- 24-hour expiration
+
+8. DEVELOPMENT & DEPLOYMENT
+-------------------------
+
+a) Development Workflow:
+```
+┌─────────┐   ┌──────────┐   ┌───────────┐   ┌──────────┐
+│ Develop │──►│ Commit   │──►│Pull Request│──►│  Merge   │
+└─────────┘   └──────────┘   └───────────┘   └──────────┘
+     ▲              │              │               │
+     └──────────────┴──────────────┴───────────────┘
+```
+
+b) Build Process:
+```
+┌────────────┐   ┌──────────┐   ┌───────────┐
+│npm install │──►│npm build │──►│npm start  │
+└────────────┘   └──────────┘   └───────────┘
+```
+
+c) Database Migration:
+```
+┌─────────────┐   ┌──────────┐   ┌───────────┐
+│Create Schema│──►│Generate  │──►│  Apply    │
+└─────────────┘   └──────────┘   └───────────┘
+```
+
+9. MAINTENANCE & MONITORING
+-------------------------
+
+a) Regular Tasks:
+- Database backups (daily)
+- Dependency updates (weekly)
+- Security audits (monthly)
+- Performance monitoring (continuous)
+
+b) Monitoring Metrics:
+- API response times
+- Database query performance
+- Error rates
+- User session analytics
+
+c) Error Handling Flow:
+```
+┌────────┐   ┌──────────┐   ┌───────────┐   ┌──────────┐
+│ Error  │──►│ Log Error│──►│Format Resp│──►│Send to UI│
+└────────┘   └──────────┘   └───────────┘   └──────────┘
+```
+
+DEVELOPMENT COMMANDS
+------------------
+npm run dev          - Start development server
+npm run build        - Build for production
+npm run start        - Start production server
+npm run db:generate  - Generate database migrations
+npm run db:push      - Push migrations to database
+npm run db:migrate   - Run migrations
+npm run db:studio    - Open Drizzle Studio
+
+ENVIRONMENT VARIABLES
+-------------------
+DATABASE_URL         - Neon PostgreSQL connection string
+JWT_SECRET          - Secret key for JWT signing
+NODE_ENV            - Development/production environment
+NEXT_PUBLIC_URL     - Frontend URL for API calls
+
+=================================================================
+End of Documentation
+=================================================================

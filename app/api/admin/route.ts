@@ -3,13 +3,29 @@ import { db } from '@/db/db';
 import { admin } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
+import { withAuth } from '../proxy';
+import { NextRequest } from 'next/server';
 
-export async function POST(req: Request) {
+/**
+ * Admin creation route
+ * --------------------
+ * Purpose:
+ * - Allows creating the first/admin users. This route is intentionally
+ *   exposed as public so the first admin can be created (see `proxy`'s
+ *   publicRoutes list which allows `/api/admin`). After initial setup
+ *   you can restrict access or remove this convenience.
+ *
+ * Input (POST JSON): { username, password, email, isAdmin }
+ * Output: created admin record (without password) or error JSON
+ * Errors: 400 for validation, 500 for server errors
+ */
+
+async function handler(req: NextRequest) {
   try {
-    const { username, password, email, phone } = await req.json();
+    const { username, password, email, isAdmin = false } = await req.json();
 
     // Basic validation
-    if (!username || !password || !email || !phone) {
+    if (!username || !password || !email) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -37,7 +53,7 @@ export async function POST(req: Request) {
       username,
       password: hashedPassword,
       email,
-      phone,
+      isAdmin,
     }).returning();
 
     return NextResponse.json(newAdmin[0]);
@@ -48,4 +64,8 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
+}
+
+export async function POST(req: NextRequest) {
+  return withAuth(req, handler);
 }

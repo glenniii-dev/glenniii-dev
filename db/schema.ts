@@ -7,7 +7,7 @@ export const admin = pgTable("admin", {
   username: varchar("username").notNull(),
   password: varchar("password").notNull(),
   email: varchar("email").unique().notNull(),
-  phone: varchar("phone").unique().notNull(),
+  isAdmin: boolean("is_admin").notNull().default(false)
 });
 
 // Projects Table

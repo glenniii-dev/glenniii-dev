@@ -8,10 +8,20 @@ export interface UserToken {
   id: number;
   email: string;
   username: string;
+  isAdmin: boolean;
 }
 
 export const createToken = (user: UserToken) => {
   return jwt.sign(user, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
+};
+
+export const verifyAuth = async (token: string): Promise<boolean> => {
+  try {
+    const user = jwt.verify(token, JWT_SECRET) as UserToken;
+    return user.isAdmin === true;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const verifyToken = (token: string): UserToken | null => {

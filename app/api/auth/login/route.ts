@@ -1,12 +1,33 @@
+/**
+ * Authentication API Route: Login Endpoint
+ * 
+ * This module handles user authentication by validating credentials and issuing JWT tokens.
+ * It uses bcrypt for password hashing and implements secure cookie-based authentication.
+ */
+
 import { NextResponse } from 'next/server';
 import { db } from '@/db/db';
 import { admin } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { createToken } from '@/utils/auth';
-import { cookies } from 'next/headers';
+import { withAuth } from '../../proxy';
+import { NextRequest } from 'next/server';
 
-export async function POST(req: Request) {
+/**
+ * Request handler for the login endpoint
+ * 
+ * @param req - The incoming HTTP request containing email and password
+ * @returns NextResponse with authentication result and token cookie
+ * 
+ * Process:
+ * 1. Validates required fields (email, password)
+ * 2. Checks user existence in database
+ * 3. Verifies password using bcrypt
+ * 4. Issues JWT token on successful authentication
+ * 5. Sets secure HTTP-only cookie with token
+ */
+async function handler(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
@@ -45,6 +66,7 @@ export async function POST(req: Request) {
       id: user[0].id,
       username: user[0].username,
       email: user[0].email,
+      isAdmin: !!user[0].isAdmin,
     };
 
     const token = createToken(userData);
@@ -73,4 +95,8 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
+}
+
+export async function POST(req: NextRequest) {
+  return withAuth(req, handler);
 }
