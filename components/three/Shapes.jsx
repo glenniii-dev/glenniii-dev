@@ -19,7 +19,7 @@ export default function Shapes() {
           scale={40}
           blur={1}
           far={9} />
-          <Environment preset="studio" />
+          <Environment files="https://cdn.jsdelivr.net/gh/pmndrs/drei-assets@master/hdri/studio_small_03_1k.hdr" />
         </Suspense>
       </Canvas>
     </div>
